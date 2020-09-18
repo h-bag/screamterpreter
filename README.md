@@ -8,4 +8,3 @@ To use, just run `python screamterpreter.py` in the project directory.
 ## Planned Features
 - Reading from files (instead of having to copy-paste or manually write the code in)
 - Editor
-- Error Handling
