@@ -6,6 +6,7 @@
 To use, just run `python screamterpreter.py` in the project directory.
 
 ## Instruction Set
+Instructions are seperated by a space.
  Command | Description                                                          
 ---------|----------------------------------------------------------------------
  AAAH    | Move the pointer to the right                                        
