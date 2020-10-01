@@ -7,7 +7,7 @@ To use, just run `python screamterpreter.py` in the project directory.
 Pre-written files must be stored in a folder named 'screams', in the same directory as the main .py file. File names are case-sensitive. I've included a 'Hello World' program to help you get a feel for how programs are written.
 
 ## Instruction Set
-Instructions are seperated by a space or newline.
+Instructions are seperated by a space.
  Command | Description                                                          
 ---------|----------------------------------------------------------------------
  AAAH    | Move the pointer to the right                                        
