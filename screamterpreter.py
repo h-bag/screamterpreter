@@ -1,3 +1,12 @@
+def getch():
+    try:
+        import msvcrt
+        char = msvcrt.getch()
+    except ImportError:
+        pass
+    return char
+
+
 def interpret(scream):
     pointerMap = {0:0}
     pointerLocation = 0
@@ -19,10 +28,11 @@ def interpret(scream):
         elif code[step] == '!!!!!!':
             print(chr(pointerMap[pointerLocation]),end='')
         elif code[step] == 'WHAT?!':
+            charInput = getch()
             try:
-                pointerMap[pointerLocation] = int(input("Input:"))
+                pointerMap[pointerLocation] = int(charInput)
             except ValueError:
-                pointerMap[pointerLocation] = ord(x)
+                pointerMap[pointerLocation] = ord(charInput)
         elif code[step] == 'OW':
             if pointerMap[pointerLocation] == 0:
                 openBraces = 1
