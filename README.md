@@ -4,6 +4,7 @@
 - Python 3.8
 
 To use, just run `python screamterpreter.py` in the project directory.
+Pre-written files must be stored in a folder named 'screams', in the same directory as the main .py file. File names are case-sensitive. I've included a 'Hello World' program to help you get a feel for how programs are written.
 
 ## Instruction Set
 Instructions are seperated by a space.
@@ -19,8 +20,7 @@ Instructions are seperated by a space.
  OWIE    | Jump back to the matching `OW` if the cell at the pointer is nonzero 
 
 ## Planned Features
-- Reading from files (instead of having to copy-paste or manually write the code in)
-- Editor
+- Unix compatability
 
 ## Contribution
 Feel free to contribute, as long as you follow [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/) conventions.
