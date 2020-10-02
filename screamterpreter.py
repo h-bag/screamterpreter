@@ -79,7 +79,7 @@ def writeDirect():
     interpret(' '.join(lines))
 
 def loadFile():
-    fileDir = os.getcwd() + '/screams/'
+    fileDir = os.path.dirname(__file__) + '/screams/'
     fileDirContents = os.listdir(fileDir)
     print("\nFiles in screams directory:\n---------------------------")
     print(*fileDirContents, sep='\n')
