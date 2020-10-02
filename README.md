@@ -20,7 +20,8 @@ Instructions are seperated by a space or newline.
  OWIE    | Jump back to the matching `OW` if the cell at the pointer is nonzero 
 
 ## Planned Features
-- Unix compatability
+- Loading files as arg (i.e `$screamterpret foobar.PAIN`)
+- Python IDLE-like UI (except terminal-based, because I still need to learn forms.)
 
 ## Contribution
 Feel free to contribute, as long as you follow [GitFlow](https://nvie.com/posts/a-successful-git-branching-model/) conventions.
