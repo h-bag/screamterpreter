@@ -13,7 +13,6 @@ def getch():
             ch = sys.stdin.read(1) # takes keystroke as ASCII
         finally:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-        print(ch)
         return ch
 
 
