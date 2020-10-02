@@ -1,12 +1,20 @@
-import os
+import os, sys
 
 def getch():
     try:
         import msvcrt
-        char = msvcrt.getch()
-    except ImportError:
-        pass
-    return char
+        return msvcrt.getch() # takes keystroke as byte literal
+    except (ImportError,ModuleNotFoundError):
+        import tty, termios
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(fd)
+            ch = sys.stdin.read(1) # takes keystroke as ASCII
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        print(ch)
+        return ch
 
 
 def interpret(scream):
@@ -32,7 +40,6 @@ def interpret(scream):
             print(chr(pointerMap[pointerLocation]),end='',flush=True)
         elif code[step] == 'WHAT?!':
             charInput = getch()
-            
             pointerMap[pointerLocation] = ord(charInput)
         elif code[step] == 'OW':
             if pointerMap[pointerLocation] == 0:
@@ -92,12 +99,12 @@ print('\n\nWritten by Baguette (https://hbaguette.neocities.org)')
 print('#####################################################\n## [L] Load File  [D] Interpret Directly  [Q] Quit ##\n#####################################################')
 menuSelected = False
 while menuSelected == False:
-    menuChoice = getch()
-    if menuChoice.lower() == b'l':
+    menuChoice = getch() # IF functions below accept byte literal OR ascii
+    if (menuChoice.lower() == b'l') or (menuChoice.lower() == 'l'):
         menuSelected = True
         loadFile()
-    elif menuChoice.lower() == b'd':
+    elif (menuChoice.lower() == b'd') or (menuChoice.lower() == 'd'):
         menuSelected = True
         writeDirect()
-    elif menuChoice.lower() == b'q':
+    elif (menuChoice.lower() == b'q') or (menuChoice.lower() == 'q'):
         quit()
