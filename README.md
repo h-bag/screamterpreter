@@ -3,7 +3,7 @@
 ## Requirements
 - Python 3.8
 
-To use, just run `python screamterpreter.py` in the project directory.
+To use, just run `screamterpreter.py` or `screamterpreter.py [file to load]` in the project directory. Is using files as an arg, it must be passed as a relative path.
 Pre-written files must be stored in a folder named 'screams', in the same directory as the main .py file. File names are case-sensitive. I've included a 'Hello World' program to help you get a feel for how programs are written.
 
 ## Instruction Set
@@ -20,7 +20,6 @@ Instructions are seperated by a space or newline.
  OWIE    | Jump back to the matching `OW` if the cell at the pointer is nonzero 
 
 ## Planned Features
-- Loading files as arg (i.e `$screamterpret foobar.PAIN`)
 - Python IDLE-like UI (except terminal-based, because I still need to learn forms.)
 
 ## Contribution

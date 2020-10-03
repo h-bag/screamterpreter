@@ -17,7 +17,6 @@ def getch():
 
 
 def interpret(scream):
-    print("---------------------------------------\nOutput:\n")
     pointerMap = {0:0}
     pointerLocation = 0
     step = 0
@@ -76,6 +75,7 @@ def writeDirect():
             lines.append(screamcode)
 
     screamcode = ' '.join(lines)
+    print("---------------------------------------\nOutput:\n")
     interpret(' '.join(lines))
 
 def loadFile():
@@ -89,10 +89,20 @@ def loadFile():
     try:
         with open(loadTarget, encoding="utf-8") as file:
             lines = [l.rstrip('\n') for l in file]
+        print("---------------------------------------\nOutput:\n")
         interpret(' '.join(lines))
     except FileNotFoundError:
         print("No such file in screams directory.")
 
+try:
+    fileDir = os.getcwd()
+    loadTarget = fileDir + '/' + sys.argv[1]
+    with open(loadTarget, encoding="utf-8") as file:
+        lines = [l.rstrip('\n') for l in file]
+    interpret(' '.join(lines))
+    quit()
+except IndexError:
+    pass
 
 print('\n\nWritten by Baguette (https://hbaguette.neocities.org)')
 print('#####################################################\n## [L] Load File  [D] Interpret Directly  [Q] Quit ##\n#####################################################')
