@@ -24,16 +24,19 @@ def tokenize(string):
     program = []
     remaining = string
     while len(remaining) > 0:
+        foundToken = False
         # Iterate over all possible tokens
         for token in tokens:
             # If the token matches the beginning of the remaining string, remove it from the remaining string and add it to the program
             if remaining.startswith(token):
                 remaining = remaining.split(token, 1)[1]
                 program.append(token)
-                continue
+                foundToken = True
+                break
 
-        # This will only be called if no tokens match
-        remaining = remaining[1:]
+        if not foundToken:
+            # This will only be called if no tokens match
+            remaining = remaining[1:]
 
     return program
 
