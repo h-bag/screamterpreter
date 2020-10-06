@@ -16,45 +16,70 @@ def getch():
         return ch
 
 
-def interpret(scream):
+# Parse a string into a list of token strings
+def tokenize(string):
+    # Tokens that start with other tokens go before the tokens they contain ('OWIE' comes before 'OW')
+    tokens = ['AAAH', 'AAAAGH', 'FUCK', 'SHIT', '!!!!!!', 'WHAT?!', 'OWIE', 'OW']
+
+    program = []
+    remaining = string
+    while len(remaining) > 0:
+        foundToken = False
+        # Iterate over all possible tokens
+        for token in tokens:
+            # If the token matches the beginning of the remaining string, remove it from the remaining string and add it to the program
+            if remaining.startswith(token):
+                remaining = remaining.split(token, 1)[1]
+                program.append(token)
+                foundToken = True
+                break
+
+        if not foundToken:
+            # This will only be called if no tokens match
+            remaining = remaining[1:]
+
+    return program
+
+
+def interpret(tokens):
     pointerMap = {0:0}
     pointerLocation = 0
     step = 0
-    code = scream.split(" ")
-    while step < (len(code)):
-        if code[step] == 'AAAH':
+    while step < len(tokens):
+        token = tokens[step]
+        if token == 'AAAH':
             pointerLocation += 1
-        elif code[step] == 'AAAAGH':
+        elif token == 'AAAAGH':
             pointerLocation -= 1
-        elif code[step] == 'FUCK':
+        elif token == 'FUCK':
             if not pointerMap.get(pointerLocation):
                 pointerMap[pointerLocation] = 0
             pointerMap[pointerLocation] += 1
-        elif code[step] == 'SHIT':
+        elif token == 'SHIT':
             if not pointerMap.get(pointerLocation):
                 pointerMap[pointerLocation] = 0
             pointerMap[pointerLocation] -= 1
-        elif code[step] == '!!!!!!':
+        elif token == '!!!!!!':
             print(chr(pointerMap[pointerLocation]),end='',flush=True)
-        elif code[step] == 'WHAT?!':
+        elif token == 'WHAT?!':
             charInput = getch()
             pointerMap[pointerLocation] = ord(charInput)
-        elif code[step] == 'OW':
+        elif token == 'OW':
             if pointerMap[pointerLocation] == 0:
                 openBraces = 1
                 while openBraces > 0:
                     step += 1
-                    if code[step] == 'OW':
+                    if tokens[step] == 'OW':
                         openBraces += 1
-                    elif code[step] == 'OWIE':
+                    elif tokens[step] == 'OWIE':
                         openBraces -= 1
-        elif code[step] == 'OWIE':
+        elif token == 'OWIE':
             openBraces = 1
             while openBraces >0:
                 step -= 1
-                if code[step] == 'OW':
+                if tokens[step] == 'OW':
                     openBraces -= 1
-                elif code[step] == 'OWIE':
+                elif tokens[step] == 'OWIE':
                     openBraces += 1
             step -= 1
         step += 1
@@ -76,7 +101,7 @@ def writeDirect():
 
     screamcode = ' '.join(lines)
     print("---------------------------------------\nOutput:\n")
-    interpret(' '.join(lines))
+    interpret(tokenize(' '.join(lines)))
 
 def loadFile():
     fileDir = os.path.dirname(__file__) + '/screams/'
@@ -90,7 +115,7 @@ def loadFile():
         with open(loadTarget, encoding="utf-8") as file:
             lines = [l.rstrip('\n') for l in file]
         print("---------------------------------------\nOutput:\n")
-        interpret(' '.join(lines))
+        interpret(tokenize(' '.join(lines)))
     except FileNotFoundError:
         print("No such file in screams directory.")
 
@@ -99,7 +124,7 @@ try:
     loadTarget = fileDir + '/' + sys.argv[1]
     with open(loadTarget, encoding="utf-8") as file:
         lines = [l.rstrip('\n') for l in file]
-    interpret(' '.join(lines))
+    interpret(tokenize(' '.join(lines)))
     quit()
 except IndexError:
     pass
