@@ -65,6 +65,8 @@ def interpret(tokens):
             charInput = getch()
             pointerMap[pointerLocation] = ord(charInput)
         elif token == 'OW':
+            if not pointerMap.get(pointerLocation):
+                pointerMap[pointerLocation] = 0
             if pointerMap[pointerLocation] == 0:
                 openBraces = 1
                 while openBraces > 0:
